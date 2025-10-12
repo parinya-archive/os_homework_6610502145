@@ -1,0 +1,8 @@
+.idea/
+.env
+*.iml
+*.xml
+*.csv
+*.png
+__pycache__/
+*.pdf

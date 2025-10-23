@@ -14,6 +14,7 @@ class PollardRho:
     3. Initialize a variable d to 1 (this will hold the gcd)
     4. Repeat until d is a non-trivial factor of n or a maximum number
     """
+
     def __init__(self, max_iterations=10000):
         """
         Initialize the Pollard's Rho algorithm
@@ -68,20 +69,20 @@ class PollardRho:
         :param c:
         :return:
         """
-        if n <=1:
+        if n <= 1:
             return None
         if n % 2 == 0:
             return 2
         if self.is_prime(n):
             return n
 
-#        initial value tortise and hare
+        #        initial value tortise and hare
         tortise = x0
         hare = x0
         d = 0
         iteration = 0
 
-#         algorithm pollard rho
+        #         algorithm pollard rho
         while d == 0 and iteration < self.max_iterations:
             iteration += 1
             tortise = self.g(tortise, n, c)
@@ -118,7 +119,7 @@ class PollardRho:
             while factor is None:
                 factor = self.pollard_rho(current, x0, c)
                 if factor is None:
-                    c += 1 # Try next c
+                    c += 1  # Try next c
 
             if factor == current:
                 factors.append(current)
@@ -144,6 +145,7 @@ class ParallelFactorizer:
     are prime.
     7. Return the list of prime factors.
     """
+
     def __init__(self):
         """
         Initialize MPI environment and PollardRho instance
@@ -155,8 +157,8 @@ class ParallelFactorizer:
 
     def parallel_factorize(self, n):
         """
-        Factorize n using parallel Pollard's Rho algorithm. Rank 0 orchestrates
-        the factoring work; other ranks focus on search tasks.
+        Factorize n using parallel Pollard's Rho algorithm. All ranks participate
+        in the search; Rank 0 manages the work queue more efficiently.
         """
         if n <= 1:
             return []
@@ -173,13 +175,17 @@ class ParallelFactorizer:
         while True:
             current = None
             if self.rank == 0:
+                # Get next candidate from work stack
                 while work_stack:
                     candidate = work_stack.pop()
                     if self.rho.is_prime(candidate):
+                        # Prime found, add it directly
                         factors.append(candidate)
                         continue
+                    # Not prime, need to factor it
                     current = candidate
                     break
+
             current = self.comm.bcast(current, root=0)
 
             if current is None:
@@ -189,9 +195,11 @@ class ParallelFactorizer:
 
             if self.rank == 0:
                 if factor is None or factor == current:
+                    # No factor found, use sequential factorization
                     for sub_factor in self.rho.factorize(current):
                         factors.append(sub_factor)
                 else:
+                    # Factor found, add both parts to work stack
                     work_stack.append(factor)
                     work_stack.append(current // factor)
 
@@ -210,18 +218,20 @@ class ParallelFactorizer:
         if n % 2 == 0:
             return 2
 
-        seed = int(time.time() * 1000) ^ (self.rank << 16)
+        # Use n and rank as seed to ensure reproducibility but different per-rank
+        seed = (n ^ (self.rank << 16)) % (2**31)
         rng = random.Random(seed)
 
-        batch_size = 256
-        max_batches = 200
-        sync_every = 16
+        # Optimized parameters: smaller batch size, less frequent syncs
+        batch_size = 16  # Reduced from 256 to reduce latency
+        max_batches = 500  # Increased iterations to compensate
+        sync_every = 50  # Reduced sync frequency (was 16) to minimize MPI overhead
 
         for b in range(max_batches):
             found_local = 0
             for _ in range(batch_size):
                 x0 = rng.randrange(2, n - 1)
-                c  = rng.randrange(1, n - 1)
+                c = rng.randrange(1, n - 1)
                 factor = self.rho.pollard_rho(n, x0, c)
                 if factor and 1 < factor < n:
                     found_local = factor

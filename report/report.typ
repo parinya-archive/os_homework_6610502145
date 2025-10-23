@@ -1,5 +1,4 @@
 #import "function.typ": *
-#import "graph.typ": *
 
 #set page(
   paper: "a4",
@@ -33,9 +32,9 @@
     $H arrow.l g(g("T"))$\
 
   // check result
-  + check $#math.text("gcd")(S - F, n) > 1$
-    - $T = H arrow.r.double #math.text("gcd")(0, n) = n > 1$
-    - $d = #math.text("gcd")(abs(T - H), n)$
+  + check $"gcd"(S-F, n) > 1$
+    - $T = H arrow.r.double gcd(0, n) = n > 1$
+    - $d = gcd(abs(T-H), n)$
     - if $d = 1$ loop ต่อ
     - if $1 lt d lt n$ find it $d$ is factor of n
     - if $d == n$ fail change parameter
@@ -45,31 +44,6 @@
 
   Time Complexity: $O(sqrt(d) log(n))$
 
-#header[Graph Visualization Example]
-
-ตัวอย่างนี้ใช้ฟังก์ชัน `graph_chart` ที่สร้างไว้ในโปรเจ็กต์เพื่อวาดกราฟเส้นแสดงแนวโน้มเวลาประมวลผลจากข้อมูลสมมติ:
-
-#let graph_data = (
-  (0, 0),
-  (2, 2),
-  (3, 0),
-  (4, 4),
-  (5, 7),
-  (6, 6),
-  (7, 9),
-  (8, 5),
-  (9, 9),
-  (10, 1),
-)
-
-#graph_chart(
-  graph_data,
-  size: (100%, 30%),
-  caption: [กราฟตัวอย่างพร้อมคำอธิบาย],
-  x_ticks: 5,
-  y_ticks: 5,
-  line_color: blue,
-)
 
 #header[Copy on Write]
 

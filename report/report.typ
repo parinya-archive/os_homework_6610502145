@@ -45,9 +45,9 @@
   Time Complexity: $O(sqrt(d) log(n))$
 
 
-#header[Copy on Write]
+#header[deadlock]
 
-ทำให้โปรแกรมแสดงให้เห็นถึงการทำงานของประบวนการ Copy on Write
+เขียนโค้ดให้
 
 
 #pagebreak()

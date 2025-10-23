@@ -33,12 +33,12 @@ pip install -r requirements.txt
 ### Step 4: Run the factorization
 
 ```bash
-python3 factor.py <large_number>
+python3 parallel.py <large_number>
 ```
 
 Example:
 ```bash
-python3 factor.py 123456789
+python3 parallel.py 123456789
 ```
 
 ## Output

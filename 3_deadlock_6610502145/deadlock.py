@@ -2,19 +2,9 @@ import threading
 import time
 import faulthandler
 import sys
-
-# show step for debug
-step_no = 0
-step_lock = threading.Lock()
-
-
-def step(msg: str) -> None:
-    """Print step message with number and flush immediately"""
-    global step_no
-    with step_lock:
-        step_no += 1
-        print(f"[STEP {step_no:02d}] {msg}")
-        sys.stdout.flush()
+import argparse
+from util.func import demo_avoidance_with_bankers, demo_detection_and_resolution
+from module.ResourceManager import step
 
 
 # resource for deadlock
@@ -93,7 +83,18 @@ def monitor_locks(duration=15):
                 step("[MONITOR] No locks currently held")
 
 
-def main():
+def classic_deadlock_demo():
+    """
+    Classic deadlock demonstration using two threads and two locks.
+    Shows Coffman's deadlock conditions:
+    - Mutual Exclusion: locks are mutually exclusive
+    - Hold and Wait: threads hold one lock while waiting for another
+    - No Preemption: locks cannot be forcefully taken away
+    - Circular Wait: T1 waits for lock B (held by T2), T2 waits for lock A (held by T1)
+    """
+    step("=" * 60)
+    step("MODE: CLASSIC DEADLOCK DEMONSTRATION")
+    step("=" * 60)
     step("start program")
     faulthandler.enable()
     step("set traceback dump after 3 seconds (shows where threads are stuck)")
@@ -122,6 +123,27 @@ def main():
         step("DEADLOCK CONFIRMED: threads still running (stuck waiting for locks)")
     else:
         step("Both threads finished successfully")
+    step("=" * 60)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Deadlock demonstration with three modes"
+    )
+    parser.add_argument(
+        "--mode",
+        choices=["classic", "avoid", "detect"],
+        default="classic",
+        help="Execution mode: classic (deadlock), avoid (Banker's algorithm), detect (detection + resolution)",
+    )
+    args = parser.parse_args()
+
+    if args.mode == "classic":
+        classic_deadlock_demo()
+    elif args.mode == "avoid":
+        demo_avoidance_with_bankers()
+    elif args.mode == "detect":
+        demo_detection_and_resolution()
 
 
 if __name__ == "__main__":

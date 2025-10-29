@@ -9,8 +9,8 @@ number = 343434341234567890
 # เตรียม list สำหรับเก็บผลลัพธ์
 results = []
 
-# ลองรันตั้งแต่ 1 ถึง 16 process
-for nproc in range(1, 17):
+# ลองรันตั้งแต่ 1 ถึง 4096 process
+for nproc in range(1, 4097):
     print(f"\n===== Running with {nproc} process(es) =====")
     start = time.time()
     subprocess.run(["mpirun", "-n", str(nproc), "python3", "parallel.py", str(number)])

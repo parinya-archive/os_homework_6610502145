@@ -47,7 +47,7 @@ mpirun -n 4 python3 parallel.py 34343434
 mpirun -n 8 python3 parallel.py 123456789
 ```
 
-### วิธีที่ 2: รัน Benchmark (ทดสอบ 1-16 processes)
+### วิธีที่ 2: รัน Benchmark (ทดสอบ 1-4096 processes)
 
 รันและบันทึกผลลัพธ์เป็น CSV:
 

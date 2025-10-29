@@ -59,3 +59,4 @@
 ]
 + Pollard's rho algorithm, *Wikipedia, The Free Encyclopedia*, 18 Apr. 2025. [Online]. Available: https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm. Accessed: Oct. 9, 2025.\
 + *Pollard’s Rho Algorithm for Prime Factorization*, *GeeksforGeeks*, 2024. [Online]. Available: https://www.geeksforgeeks.org/dsa/pollards-rho-algorithm-prime-factorization/. Accessed: Oct. 9, 2025.
++ https://education.molssi.org/parallel-programming/03-distributed-examples-mpi4py.html

@@ -13,6 +13,10 @@
   font: "Liberation Sans",
 )
 
+#show link: set text(blue)
+#show strong: set text(size: 13pt)
+
+
 #topic[OS report 2025]
 #header[Intro to Parallel Programming]
 
@@ -132,4 +136,13 @@ $
 )[
   Reference:
 ]
-+ https://mpi4py.readthedocs.io/en/stable/
+1. “mpi4py — MPI for Python,” mpi4py Documentation. [Online]. Available: https://mpi4py.readthedocs.io/en/stable/. Accessed: Oct. 29, 2025.\
+2. “Simple deadlock examples,” Stack Overflow. [Online]. Available: https://stackoverflow.com/questions/1385843/simple-deadlock-examples. Accessed: Oct. 29, 2025.\
+3. “Program for deadlock free condition in operating system,” GeeksforGeeks. [Online]. Available: https://www.geeksforgeeks.org/operating-systems/program-for-deadlock-free-condition-in-operating-system/. Accessed: Oct. 29, 2025.\
+4. “Using mpi4py to parallelize a for loop on a compute cluster,” Stack Overflow. [Online]. Available: https://stackoverflow.com/questions/50979373/using-mpi4py-to-parallelize-a-for-loop-on-a-compute-cluster. Accessed: Oct. 29, 2025.\
+5. “Parallelizing a for loop in Python,” Computational Science Stack Exchange. [Online]. Available: https://scicomp.stackexchange.com/questions/19586/parallelizing-a-for-loop-in-python. Accessed: Oct. 29, 2025.\
+6. “Parallel programming in Python – mpi4py part 1,” PDC Center for High Performance Computing, KTH Royal Institute of Technology. [Online]. Available: https://www.kth.se/blogs/pdc/2019/08/parallel-programming-in-python-mpi4py-part-1/. Accessed: Oct. 29, 2025.\
+7. D. Doshi, “Large file splitting with Python threading for improved performance,” Medium. [Online]. Available: https://medium.com/@darshan_doshi/large-file-splitting-with-python-threading-for-improved-performance-616f03e4622c. Accessed: Oct. 29, 2025.\
+8. J. Limoff, “Understanding deadlocks in Python with examples,” Medium. [Online]. Available: https://medium.com/@jaklimoff/understanding-deadlocks-in-python-with-examples-20b5e00f1eb8. Accessed: Oct. 29, 2025.\
+9. “Parallelize a function call with mpi4py,” Stack Overflow. [Online]. Available: https://stackoverflow.com/questions/37159923/parallelize-a-function-call-with-mpi4py. Accessed: Oct. 29, 2025.\
+10. “Introduction of deadlock in operating system,” GeeksforGeeks. [Online]. Available: https://www.geeksforgeeks.org/operating-systems/introduction-of-deadlock-in-operating-system/. Accessed: Oct. 29, 2025.

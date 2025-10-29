@@ -4,13 +4,12 @@ import csv
 from datetime import datetime
 
 # ตัวเลขที่อยากหาตัวประกอบ
-number = 343434341234567890
+number = 2**56
 
 # เตรียม list สำหรับเก็บผลลัพธ์
 results = []
 
-# ลองรันตั้งแต่ 1 ถึง 4096 process
-for nproc in range(1, 4097):
+for nproc in range(1, 16):
     print(f"\n===== Running with {nproc} process(es) =====")
     start = time.time()
     subprocess.run(["mpirun", "-n", str(nproc), "python3", "parallel.py", str(number)])

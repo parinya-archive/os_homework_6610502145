@@ -4,7 +4,7 @@ import csv
 from datetime import datetime
 
 # ตัวเลขที่อยากหาตัวประกอบ
-number = int(1.5 * 10**19)
+number = 2**56
 
 # เตรียม list สำหรับเก็บผลลัพธ์
 results = []

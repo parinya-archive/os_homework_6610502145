@@ -44,13 +44,24 @@
 - $p$ คือ จำนวน task ที่ parallel ได้
 - $1-p$ คือ จำนวน task ที่ serquencial
 
+*Result*
+เป้าหมาย: หาว่า program มีส่วนของ parallel part และ sequential part เท่าไร
+จากความสัมพันธ์ $S(N) = 1/((1-p) + p/N)$ จะหา $p$\
++ หาค่า baseline $T(1)$
+  โดยดูจากค่า csv
+
 #figure(
   image("../1_parallel_6610502145/graphs/02_speedup_analysis.png", width: 80%),
   caption: [speed up],
 )
 
+*Analysis*
+- Speed up เพิ่มขึ้นตามจำนวน process แต่เริ่มชะลอเมื่อเกินขนาด X เพราะ overhead (คอขวดตรง communication และ sync)
+- Efficience ต่อ core ลดลงเมื่อ process มากขึ้นตาม *Amdahl's Law*: $S = 1 / ((1- p) + P/N)$
+
+
 #pagebreak()
-#header[deadlock]
+#header[deadlock]\
 #h(2em) เป็นการจำลอง deadlock ด้วย coffman's Condition โดยใช้ python\
 โดยจะจำลองโดยการมีมากกว่า 2 thread จับจองทรัพยากรพร้อมกัน ตรวจจับโดยการใช้ wait for graph และจับเวลา
 

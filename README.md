@@ -1,4 +1,8 @@
 # OS Report 2025
+![Python](https://img.shields.io/badge/Python-3.13%2B-blue)
+![MPI](https://img.shields.io/badge/MPI-OpenMPI%2FMPICH-green)
+![License](https://img.shields.io/badge/License-Educational-lightgrey)
+![Typst](https://img.shields.io/badge/Report-Typst-7b6df6)
 
 โค้ดและรายงานสำหรับวิชา Operating Systems ปีการศึกษา 2025 — เลือกทำ 2 หัวข้อ ได้แก่ parallel integer factorization และ deadlock handling. ที่นี่มีซอร์สโค้ด สคริปต์ทดลอง รายงานฉบับเต็ม และเอกสารประกอบการรันทั้งหมด
 

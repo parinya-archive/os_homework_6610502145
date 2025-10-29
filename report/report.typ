@@ -16,47 +16,48 @@
 #topic[OS report 2025]
 #header[Intro to Parallel Programming]
 
+*Algorithm Exlanation*\
+ใช้ Algorithm แยกตัวประกอบของ $n$ แบบลองไปเรื่อยๆตั้งแต่ $1$ ถึง $sqrt(n)$\
+หลักการที่ใช้ของ parallel คือการแบ่งจำนวนเป็น chunk แล้วให้แค่ละ process รันในส่วนของตัวเอง\
+*Pseudo-code*
+```
+- Input: n, process
+- แบ่งช่วง $[2, sqrt(n)]$ ออกเป็นจำนวน process ช่วง
+- ไล่เช็คหาว่า n หารในช่วงตัวเองและบันทึกตัวที่
+- ให้ "MPI.Gather" รวมกันแล้วจัดรูปผลเป็นชุดของตัวประกอบ
+```
+*Implementation notes*
+- *Libraries*: python 3.13.9, mpi4py
+- *I/O*: อ่าน n จาก argument ของไฟล์บันทึกเวลาและหน่วยความจำ
+- *Correctness*: cross-check เทียบ version sequenctial ตอน process = 1
+*Experiment setup*
+- *Hardware*: 13th Gen Intel(R) Core(TM) i5-13500H, RAM 15 GiB
+- *OS & Runtime*: Fedora Linux 42 (Workstation Edition) x86_64
+- *Parameters*: n หลายขนาด และจำนวน process ตั้งแต่ 1 ถึง 15
 
-เขียนโปรแกรมแยกตัวประกอบของจำนวนขนาดใหญ่ n (factorization) โดยใช้เครื่องมือคือ MPI4py
+*Performance Analysis*\
+#h(2em) การวัดผลที่ใช้เวลาจำนวน processes เทียบกับจำนวนวินาทีและ speed up เมื่อเทียบกับ 1 process และวัด efficiency ต่อ 1 core\
+ตาม Amdahl's Law สูตรคือ $S = 1 / ((1- p) + P/N)$\
+โดยที่
+- $S$ คือ speed up
+- $N$ คือ จำนวน process
+- $p$ คือ จำนวน task ที่ parallel ได้
+- $1-p$ คือ จำนวน task ที่ serquencial
 
-
-+ การเลือกใช้ algorithm ในงานการแยกตัวประกอบขนาด n ใช้ algorithm ของ #link("https://www.geeksforgeeks.org/dsa/pollards-rho-algorithm-prime-factorization/")[*Pollard's Rho Algorithm*]
-  // intiilzie
-  + start intiilze value $g(x) = x^2 + 1 (mod n)$ let value  c = 1
-  + intiilze variable $x_0 = 2$\
-    $x_i = g(x_(i-1))$
-
-  // while d == 1
-  + define value $"T" = x_0$ and $"H" = x_0$\
-    $T arrow.l g("T")$\
-    $H arrow.l g(g("T"))$\
-
-  // check result
-  + check $"gcd"(S-F, n) > 1$
-    - $T = H arrow.r.double gcd(0, n) = n > 1$
-    - $d = gcd(abs(T-H), n)$
-    - if $d = 1$ loop ต่อ
-    - if $1 lt d lt n$ find it $d$ is factor of n
-    - if $d == n$ fail change parameter
-
-
-  คำเตือน: algortihm นี้จะไม่หยุดถ้า n เป็นจำนวนเฉพาะดังนั้นเราจะตั้งค่า loop iterator ด้วย และล้มเหลวลองปรับ parameter
-
-  Time Complexity: $O(sqrt(d) log(n))$
-
-
-#header[deadlock]
-
-เขียนโค้ดให้
-
+#figure(
+  image("../1_parallel_6610502145/graphs/02_speedup_analysis.png", width: 80%),
+  caption: [speed up],
+)
 
 #pagebreak()
+#header[deadlock]
+#h(2em) เป็นการจำลอง deadlock ด้วย coffman's Condition โดยใช้ python\
+โดยจะจำลองโดยการมีมากกว่า 2 thread จับจองทรัพยากรพร้อมกัน ตรวจจับโดยการใช้ wait for graph และจับเวลา
 
+#pagebreak()
 #text(
   weight: "bold",
 )[
   Reference:
 ]
-+ Pollard's rho algorithm, *Wikipedia, The Free Encyclopedia*, 18 Apr. 2025. [Online]. Available: https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm. Accessed: Oct. 9, 2025.\
-+ *Pollard’s Rho Algorithm for Prime Factorization*, *GeeksforGeeks*, 2024. [Online]. Available: https://www.geeksforgeeks.org/dsa/pollards-rho-algorithm-prime-factorization/. Accessed: Oct. 9, 2025.
-+ https://education.molssi.org/parallel-programming/03-distributed-examples-mpi4py.html
++ https://mpi4py.readthedocs.io/en/stable/

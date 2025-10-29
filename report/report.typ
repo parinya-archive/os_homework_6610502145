@@ -48,11 +48,29 @@
 เป้าหมาย: หาว่า program มีส่วนของ parallel part และ sequential part เท่าไร
 จากความสัมพันธ์ $S(N) = 1/((1-p) + p/N)$ จะหา $p$\
 + หาค่า baseline $T(1)$
-  โดยดูจากค่า csv
+  โดยดูจากค่า csv ตรงที่ $T(1)$
++ จัดรูปสมการให้หาค่า $p_(n)$
+  + จาก $S(N) = 1/ ((1-p) + P/N)$
+  + $1/S(N) = 1-p(1 - 1/N) bb(arrow) p = (1-1/(S(N)))/(1-1/N)$
++ หาค่า $p_(n)$ สำหรับ $n = 1, 2, 3, 4,...$
+$
+  p_(n) = (1-1/(S(N)))/(1-1/N)
+$
++ รวมค่า $p_(N)$ เพื่อค่า $p$ ที่กลางที่สุด
+  วิธีคือเอาค่าเฉลี่ยของ median ของ $p_(N)$ ด้วย $p_(N) = (1-1/S(N))/ 1-1/N$
+
+*Summary*
+จากการคำนวณพบว่า parallelizable = 72.43% และส่วนของ serial = 27.57 % โดยใช้
+
+
 
 #figure(
-  image("../1_parallel_6610502145/graphs/02_speedup_analysis.png", width: 80%),
-  caption: [speed up],
+  image("../1_parallel_6610502145/min_graph/01_execution_time.png", width: 80%),
+  caption: [speed up เมื่อเลขน้อย],
+)
+#figure(
+  image("../1_parallel_6610502145/max_graph/01_execution_time.png", width: 80%),
+  caption: [speed up เมื่อเลขน้อย],
 )
 
 *Analysis*

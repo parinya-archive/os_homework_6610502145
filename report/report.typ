@@ -35,7 +35,7 @@
 - *I/O*: อ่าน n จาก argument ของไฟล์บันทึกเวลาและหน่วยความจำ
 - *Correctness*: cross-check เทียบ version sequenctial ตอน process = 1
 *Experiment setup*
-- *Hardware*: 13th Gen Intel(R) Core(TM) i5-13500H, RAM 15 GiB
+- *Hardware*: 13th Gen Intel(R) Core(TM) i5-13500H, RAM 16 GB
 - *OS & Runtime*: Fedora Linux 42 (Workstation Edition) x86_64
 - *Parameters*: n หลายขนาด และจำนวน process ตั้งแต่ 1 ถึง 15
 
@@ -61,7 +61,7 @@ $
   p_(n) = (1-1/(S(N)))/(1-1/N)
 $
 + รวมค่า $p_(N)$ เพื่อค่า $p$ ที่กลางที่สุด
-  วิธีคือเอาค่าเฉลี่ยของ median ของ $p_(N)$ ด้วย $p_(N) = (1-1/S(N))/ 1-1/N$
+  วิธีคือเอาค่าเฉลี่ยของ median ของ $p_(N)$ ด้วย $p_(N) = (1-1/S(N))/ (1-1/N)$
 
 *Summary*
 จากการคำนวณพบว่า parallelizable = 72.43% และส่วนของ serial = 27.57 % โดยใช้
@@ -70,11 +70,11 @@ $
 
 #figure(
   image("../1_parallel_6610502145/min_graph/01_execution_time.png", width: 80%),
-  caption: [speed up เมื่อเลขน้อย],
+  caption: [Speed-up comparison for small input sizes],
 )
 #figure(
   image("../1_parallel_6610502145/max_graph/01_execution_time.png", width: 80%),
-  caption: [speed up เมื่อเลขน้อย],
+  caption: [Speed-up comparison for large input sizes],
 )
 
 *Analysis*

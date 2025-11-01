@@ -5,4 +5,3 @@
 *.csv
 *.png
 __pycache__/
-*.pdf
